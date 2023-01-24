@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Vue logo" src="./assets/uber-eats-logo.png" id="logo">
+  <RestaurantRow v-for="(card, index) in 9" :key="index" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import RestaurantRow from './components/RestaurantRow.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    RestaurantRow
   }
 }
 </script>
 
 <style>
+@import url('./style/reset.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#logo {
+  width: 100px;
+  margin: 20px 20px;
+
 }
 </style>
