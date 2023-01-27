@@ -3,7 +3,9 @@
     <h2 class="title">
       Populaires à proximité
     </h2>
-    <div class="wrapper-card"><RestaurantCard v-for="(card, index) in 3" :key="index" /></div>
+    <div class="wrapper-card">
+      <RestaurantCard v-for="(card, index) in three_restaurant" :info_restaurant="card" :key="index" />
+    </div>
 
   </div>
 </template>
@@ -16,6 +18,11 @@ export default {
   components: {
     RestaurantCard,
   },
+  props: {
+    three_restaurant: {
+      type: Array,
+    }
+  }
 }
 </script>
 
@@ -31,6 +38,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 30px;
     }
   }
 </style>

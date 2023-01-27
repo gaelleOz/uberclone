@@ -1,16 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/uber-eats-logo.png" id="logo">
-  <RestaurantRow v-for="(card, index) in 9" :key="index" />
+  <FirstPage/>
 </template>
 
 <script>
 
-import RestaurantRow from './components/RestaurantRow.vue'
+import FirstPage from './page/FirstPage.vue'
 
 export default {
   name: 'App',
   components: {
-    RestaurantRow
+    FirstPage,
   }
 }
 </script>
@@ -20,11 +19,7 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 #app {
   font-family: 'Roboto', sans-serif;
-}
-
-#logo {
-  width: 100px;
-  margin: 20px 20px;
-
+  padding: 0px 20px;
+  margin: 0px 20px;
 }
 </style>
