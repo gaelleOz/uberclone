@@ -76,7 +76,7 @@ export default {
     }
 
     .time {
-      padding: 0 15px;
+      padding: 0px 15px;
       font-size: 0.9em;
       color: #9b9b9b;
     }
