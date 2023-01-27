@@ -1,16 +1,12 @@
 <template>
-  <FirstPage/>
+  <router-view></router-view>
 </template>
 
 <script>
 
-import FirstPage from './page/FirstPage.vue'
 
 export default {
   name: 'App',
-  components: {
-    FirstPage,
-  }
 }
 </script>
 

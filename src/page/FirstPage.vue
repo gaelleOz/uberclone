@@ -10,12 +10,14 @@
           placeholder="De quoi avez-vous envie?"
           v-model="user_search_restaurant"/>
         <div class="search">
-          <div v-for="(restaurant, i) in search_restaurant" :key="i" class="container-restaurant-search">
-            <div class="wrapper-img">
-              <img :src="restaurant.image" alt="search" />
+          <router-link to="/restaurant">
+            <div v-for="(restaurant, i) in search_restaurant" :key="i" class="container-restaurant-search">
+              <div class="wrapper-img">
+                <img :src="restaurant.image" alt="search" />
+              </div>
+              <p>{{ restaurant.name }}</p>
             </div>
-            <p>{{ restaurant.name }}</p>
-          </div>
+        </router-link>
         </div>
       </div>
     </div>
@@ -73,16 +75,12 @@ export default {
     let user_search_restaurant = ref("");
     let search_restaurant = ref([]);
     watch(user_search_restaurant, (newValue) => {
-      let regex = RegExp(newValue);
+      let regex = RegExp(newValue.toLowerCase());
       let new_search_restaurant = all_restaurant.filter((restaurant) =>
-        regex.test(restaurant.name)
+        regex.test(restaurant.name.toLowerCase())
       );
       search_restaurant.value = new_search_restaurant;
-      if (newValue == 0) {
-        search_restaurant.value = [];
-      } else {
-        search_restaurant.value = new_search_restaurant;
-      }
+     newValue == 0 ?  search_restaurant.value = [] : search_restaurant.value = new_search_restaurant;
     }),
       onMounted(makeDataRestaurant);
     return {
@@ -128,6 +126,10 @@ export default {
          display: flex;
          align-items: center;
          padding: 10px;
+
+         &:hover {
+            background-color: #f6f6f6;
+         }
         }
 
         .wrapper-img{
