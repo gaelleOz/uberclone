@@ -1,8 +1,23 @@
 <template>
   <div class="home">
     <div class="header">
-      <img src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/ee037401cb5d31b23cf780808ee4ec1f.svg" alt="logo Uber eats">
-      <input type="text" placeholder="De quoi avez-vous envie?" v-model="user_search_restaurant">
+      <img
+        src="https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/ee037401cb5d31b23cf780808ee4ec1f.svg"
+        alt="logo Uber eats"/>
+      <div class="wrapper-input">
+        <input
+          type="text"
+          placeholder="De quoi avez-vous envie?"
+          v-model="user_search_restaurant"/>
+        <div class="search">
+          <div v-for="(restaurant, i) in search_restaurant" :key="i" class="container-restaurant-search">
+            <div class="wrapper-img">
+              <img :src="restaurant.image" alt="search" />
+            </div>
+            <p>{{ restaurant.name }}</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="banner"></div>
     <RestaurantRow
@@ -55,49 +70,86 @@ export default {
         }
       }
     };
-    let user_search_restaurant = ref('');
-    watch(user_search_restaurant, newValue => {
+    let user_search_restaurant = ref("");
+    let search_restaurant = ref([]);
+    watch(user_search_restaurant, (newValue) => {
       let regex = RegExp(newValue);
-      let test_array = all_restaurant.filter(restaurant => regex.test(restaurant.name));
-      console.log(test_array)
+      let new_search_restaurant = all_restaurant.filter((restaurant) =>
+        regex.test(restaurant.name)
+      );
+      search_restaurant.value = new_search_restaurant;
+      if (newValue == 0) {
+        search_restaurant.value = [];
+      } else {
+        search_restaurant.value = new_search_restaurant;
+      }
     }),
-    onMounted(makeDataRestaurant);
+      onMounted(makeDataRestaurant);
     return {
       data_restaurant,
-      user_search_restaurant
+      user_search_restaurant,
+      search_restaurant,
     };
   },
 };
 </script>
 
 <style lang="scss">
-
-.home{
+.home {
   .header {
     height: 120px;
-    width:100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    img{
+    img {
       width: 200px;
     }
-    input{
-      background-color: #f6f6f6;
-      width: 400px;
-      height: 60px;
-      border-radius: 5px;
-      border: none;
-      padding-left: 20px;
-      outline: none;
+    .wrapper-input {
+      position: relative;
+
+      input {
+        background-color: #f6f6f6;
+        width: 400px;
+        height: 60px;
+        border-radius: 5px;
+        border: none;
+        padding-left: 20px;
+        outline: none;
+      }
+      .search {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        background-color: #ffffff;
+
+
+        .container-restaurant-search{
+         display: flex;
+         align-items: center;
+         padding: 10px;
+        }
+
+        .wrapper-img{
+          height:60px;
+          width: 60px;
+          margin-right: 25px;
+          overflow: hidden;
+          border-radius: 50%;
+        }
+        img{
+          height: 100%;
+          width: auto;
+        }
+      }
     }
   }
   .banner {
     height: 200px;
     width: 100%;
-    background-image: url('https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/9b21aa66b4922ae2.png');
+    background-image: url("https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/9b21aa66b4922ae2.png");
     background-size: cover;
-    background-position:center center;
+    background-position: center center;
     margin-bottom: 20px;
   }
 }
